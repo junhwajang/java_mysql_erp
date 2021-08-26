@@ -1,5 +1,20 @@
 package java_mysql_erp.dao;
 
-public interface TitleDao {
+import java.util.ArrayList;
 
+import java_mysql_erp.dto.Title;
+
+public interface TitleDao {
+//select, delete, insert, update
+	
+	ArrayList<Title> selectTitleByAll();
+	
+	Title selectTiltleByCode(Title title);
+	
+	int insertTitle( Title title);
+	 
+	int updateTitle(Title title);
+	
+	int deleteTitle(Title title);
+	
 }
