@@ -78,5 +78,5 @@ ALTER TABLE erp.employee
          dno -- 부서
       )
       REFERENCES erp.department ( -- 부서
-         code -- 부서코드
+         code -- 새 컬럼
       );
