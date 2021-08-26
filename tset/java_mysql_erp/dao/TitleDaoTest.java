@@ -1,14 +1,12 @@
 package java_mysql_erp.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -19,7 +17,7 @@ import java_mysql_erp.dto.Title;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TitleDaoTest {
 	private TitleDao dao;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		dao = TitleDaoImpl.getInstance();
@@ -33,7 +31,7 @@ public class TitleDaoTest {
 
 	@Test
 	public void test01SelectTitleByAll() {
-		System.out.println("testSeleTitleleByAll()");
+		System.out.println("testSelectTitleByAll()");
 		ArrayList<Title> list = dao.selectTitleByAll();
 		Assert.assertNotEquals(0, list.size());
 //		list.stream().forEach(System.out::println);
@@ -41,9 +39,9 @@ public class TitleDaoTest {
 	}
 
 	@Test
-	public void test02SelectTiltleByCode() {
-		System.out.println("testSelectTiltleByCode()");
-		Title selectTitle = dao.selectTiltleByCode(new Title(5));
+	public void test02SelectTitleByCode() {
+		System.out.println("testSelectTitleByCode()");
+		Title selectTitle = dao.selectTitleByCode(new Title(5));
 		Assert.assertNotNull(selectTitle);
 		System.out.println(selectTitle);
 	}
@@ -59,7 +57,8 @@ public class TitleDaoTest {
 	@Test
 	public void test04UpdateTitle() {
 		System.out.println("test04UpdateTitle()");
-		Title selectedTitle = dao.selectTiltleByCode(new Title(6));
+		//검색후 수정
+		Title selectedTitle = dao.selectTitleByCode(new Title(6));
 		selectedTitle.setName("계약직");
 		
 		int res = dao.updateTitle(selectedTitle);
