@@ -9,11 +9,14 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java_mysql_erp.dao.impl.TitleDaoImpl;
 import java_mysql_erp.dto.Title;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TitleDaoTest {
 	private TitleDao dao;
 
@@ -24,11 +27,12 @@ public class TitleDaoTest {
 
 	@After
 	public void tearDown() throws Exception {
+		System.out.println();
 		dao = null;
 	}
 
 	@Test
-	public void testSelectTitleByAll() {
+	public void test01SelectTitleByAll() {
 		System.out.println("testSeleTitleleByAll()");
 		ArrayList<Title> list = dao.selectTitleByAll();
 		Assert.assertNotEquals(0, list.size());
@@ -37,23 +41,39 @@ public class TitleDaoTest {
 	}
 
 	@Test
-	public void testSelectTiltleByCode() {
-		fail("Not yet implemented");
+	public void test02SelectTiltleByCode() {
+		System.out.println("testSelectTiltleByCode()");
+		Title selectTitle = dao.selectTiltleByCode(new Title(5));
+		Assert.assertNotNull(selectTitle);
+		System.out.println(selectTitle);
 	}
 
 	@Test
-	public void testInsertTitle() {
-		fail("Not yet implemented");
+	public void test03InsertTitle() {
+		System.out.println("testInsertTitle()");
+		Title newTitle = new Title(6, "인턴");
+		int res = dao.insertTitle(newTitle);
+		Assert.assertEquals(1, res);
 	}
 
 	@Test
-	public void testUpdateTitle() {
-		fail("Not yet implemented");
+	public void test04UpdateTitle() {
+		System.out.println("test04UpdateTitle()");
+		Title selectedTitle = dao.selectTiltleByCode(new Title(6));
+		selectedTitle.setName("계약직");
+		
+		int res = dao.updateTitle(selectedTitle);
+		Assert.assertEquals(1, res);
+		
+		test01SelectTitleByAll();
 	}
 
 	@Test
-	public void testDeleteTitle() {
-		fail("Not yet implemented");
+	public void test05DeleteTitle() {
+		System.out.println("test05DeleteTitle()");
+		int res = dao.deleteTitle(new Title(6));
+		Assert.assertEquals(1, res);
+		test01SelectTitleByAll();
 	}
 
 }
